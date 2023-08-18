@@ -1,11 +1,11 @@
 package main
 
 import (
-	"net/http"
 	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/juliotorresmoreno/electric/handlers"
 )
 
 func setupRouter() *gin.Engine {
@@ -23,10 +23,8 @@ func setupRouter() *gin.Engine {
 		MaxAge: 12 * time.Hour,
 	}))
 
-	// Ping test
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(http.StatusOK, "pong")
-	})
+	handlers.AttachStatusHandler(r.Group("/status"))
+	handlers.AttachConsumptionHandler(r.Group("/consumption"))
 
 	return r
 }
