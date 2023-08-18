@@ -1,10 +1,12 @@
 package main
 
 import (
+	"log"
 	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/juliotorresmoreno/electric/db"
 	"github.com/juliotorresmoreno/electric/handlers"
 )
 
@@ -29,8 +31,16 @@ func setupRouter() *gin.Engine {
 	return r
 }
 
+func setup() {
+	conn, err := db.GetConnection()
+	if err != nil {
+		log.Fatal(err)
+	}
+	db.AutoMigrate(conn)
+}
+
 func main() {
+	setup()
 	r := setupRouter()
-	// Listen and Server in 0.0.0.0:8081
 	r.Run(":8081")
 }
