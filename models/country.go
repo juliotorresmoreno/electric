@@ -7,6 +7,4 @@ type Country struct {
 
 	Name string
 	Code string
-
-	CountryId uint
 }

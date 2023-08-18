@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/juliotorresmoreno/electric/config"
 	"github.com/juliotorresmoreno/electric/db"
 	"github.com/juliotorresmoreno/electric/handlers"
 )
@@ -40,7 +41,11 @@ func setup() {
 }
 
 func main() {
+	conf, err := config.GetConfig()
+	if err != nil {
+		log.Fatal(err)
+	}
 	setup()
 	r := setupRouter()
-	r.Run(":8081")
+	r.Run(conf.Addr)
 }

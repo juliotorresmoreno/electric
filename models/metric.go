@@ -1,14 +1,17 @@
 package models
 
 import (
+	"time"
+
 	"gorm.io/gorm"
 )
 
-type Consumption struct {
+type Metric struct {
 	gorm.Model
 
-	Address            string
-	Period             string
+	LocationId         uint
+	Location           *Location
+	Date               time.Time
 	Active             float32
 	ReactiveInductive  float32
 	ReactiveCapacitive float32

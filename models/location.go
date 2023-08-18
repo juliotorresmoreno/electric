@@ -9,6 +9,6 @@ type Location struct {
 	Owner       *User
 	Address     string
 	Description string
-	Latitude    int
-	Longitude   int
+	Latitude    float32
+	Longitude   float32
 }
